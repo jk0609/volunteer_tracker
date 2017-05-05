@@ -15,7 +15,7 @@ describe('Volunteer') do
       volunteer2 = Volunteer.new({:id=>nil, :name=>'volunteer2'})
       volunteer1.save
       volunteer2.save
-      expect(Volunteer.all).to(eq([{'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>'0'},{'id'=>volunteer2.id, 'name'=>volunteer2.name, 'project_id'=>'0'}]))
+      expect(Volunteer.all).to(eq([volunteer1,volunteer2]))
     end
   end
 
@@ -23,7 +23,7 @@ describe('Volunteer') do
     it('adds self to database and updates id on app object') do
       volunteer1 = Volunteer.new({:id=>nil, :name=>'volunteer1'})
       volunteer1.save
-      expect(Volunteer.all).to(eq([{'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>'0'}]))
+      expect(Volunteer.all).to(eq([volunteer1]))
     end
   end
 
@@ -31,18 +31,26 @@ describe('Volunteer') do
     it('returns volunteer object in hash form with matching id as argument') do
       volunteer1 = Volunteer.new({:id=>nil, :name=>'volunteer1'})
       volunteer1.save
-      expect(Volunteer.find(volunteer1.id)).to(eq({'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>'0'}))
+      expect(Volunteer.find(volunteer1.id)).to(eq(volunteer1))
     end
   end
 
-  describe('.add_project') do #remove project works the same but sets project_id = 0
-    it('updates project_id attribute of self') do
+  describe('.delete') do
+    it('deletes self from database') do
       volunteer1 = Volunteer.new({:id=>nil, :name=>'volunteer1'})
-      project1 = Project.new({:id=>nil, :name=>'project1'})
       volunteer1.save
-      project1.save
-      volunteer1.add_project(project1.id)
-      expect(Volunteer.find(volunteer1.id)).to(eq({'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>project1.id}))
+      volunteer1.delete
+      expect(Volunteer.all).to(eq([]))
     end
   end
+
+  describe('.update') do
+    it('changes attributes of an existing database entry') do
+      volunteer1 = Volunteer.new({:id=>nil, :name=>'volunteer1'})
+      volunteer1.save
+      volunteer1.update(:name=>'volunteer2')
+      expect(volunteer1.name).to(eq('volunteer2'))
+    end
+  end
+
 end

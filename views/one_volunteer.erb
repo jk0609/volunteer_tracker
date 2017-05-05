@@ -1,14 +1,28 @@
-<h1><%= @volunteer['name'] %></h1>
+<h1><%= @volunteer.name %></h1>
 
 <h3>Project:
-<% if @volunteer['project_id']=='0'%>
+<% if @volunteer.project_id=='0'%>
   None
 <% else %>
-  <%= @project['name'] %>
+  <%= @project.name %>
 <% end %>
 </h3>
 
 <!--hours worked  -->
-
+<form class="" action="/volunteers/<%= @volunteer.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+    <label for="new_name">Change Name</label>
+    <input type="text" name="new_name">
+  </div>
+  <button type="submit" name="button">Update Volunteer</button>
+</form>
+<br>
+<form class="" action="/volunteers" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="hidden" name="volunteer_id" value="<%= @volunteer.id %>">
+  <button type="submit" name="button">Delete Volunteer</button>
+</form>
+<br>
 <a href="/" class='btn btn-info'>Return to Projects</a>
 <a href="/volunteers" class='btn btn-info'>See All Volunteers</a>

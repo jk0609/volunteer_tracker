@@ -1,13 +1,13 @@
 <h1>All Volunteers</h1>
 <ul>
   <% @volunteers.each do |volunteer|  %>
-  <li><a href="\volunteers\<%= volunteer['id'] %>"><%= volunteer['name'] %></a></li>
+  <li><a href="\volunteers\<%= volunteer.id %>"><%= volunteer.name %></a></li>
   <% end  %>
 </ul>
 
 <br><br>
 
-<h1>Add Project</h1>
+<h1>Add Volunteer</h1>
 <form action="/volunteers" method="post">
   <div class="form-group">
     <label for="volunteer_name">Volunteer Name</label>
