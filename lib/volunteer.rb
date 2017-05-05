@@ -1,11 +1,10 @@
 class Volunteer
-  attr_accessor(:id, :name, :project_id, :hours)
+  attr_accessor(:id, :name, :project_id)
 
   def initialize(attrib)
     @id = attrib[:id]
     @name = attrib[:name]
     @project_id = 0
-    @hours = 0
   end
 
   define_method(:==) do |volunteer2|

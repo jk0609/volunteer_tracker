@@ -15,7 +15,7 @@ describe('Volunteer') do
       volunteer2 = Volunteer.new({:id=>nil, :name=>'volunteer2'})
       volunteer1.save
       volunteer2.save
-      expect(Volunteer.all).to(eq([{'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>'0', 'hours'=>'0'},{'id'=>volunteer2.id, 'name'=>volunteer2.name, 'project_id'=>'0', 'hours'=>'0'}]))
+      expect(Volunteer.all).to(eq([{'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>'0'},{'id'=>volunteer2.id, 'name'=>volunteer2.name, 'project_id'=>'0'}]))
     end
   end
 
@@ -23,7 +23,7 @@ describe('Volunteer') do
     it('adds self to database and updates id on app object') do
       volunteer1 = Volunteer.new({:id=>nil, :name=>'volunteer1'})
       volunteer1.save
-      expect(Volunteer.all).to(eq([{'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>'0', 'hours'=>'0'}]))
+      expect(Volunteer.all).to(eq([{'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>'0'}]))
     end
   end
 
@@ -31,7 +31,7 @@ describe('Volunteer') do
     it('returns volunteer object in hash form with matching id as argument') do
       volunteer1 = Volunteer.new({:id=>nil, :name=>'volunteer1'})
       volunteer1.save
-      expect(Volunteer.find(volunteer1.id)).to(eq({'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>'0', 'hours'=>'0'}))
+      expect(Volunteer.find(volunteer1.id)).to(eq({'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>'0'}))
     end
   end
 
@@ -42,7 +42,7 @@ describe('Volunteer') do
       volunteer1.save
       project1.save
       volunteer1.add_project(project1.id)
-      expect(Volunteer.find(volunteer1.id)).to(eq({'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>project1.id, 'hours'=>'0'}))
+      expect(Volunteer.find(volunteer1.id)).to(eq({'id'=>volunteer1.id, 'name'=>volunteer1.name, 'project_id'=>project1.id}))
     end
   end
 end

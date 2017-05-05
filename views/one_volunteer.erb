@@ -1,0 +1,14 @@
+<h1><%= @volunteer['name'] %></h1>
+
+<h3>Project:
+<% if @volunteer['project_id']=='0'%>
+  None
+<% else %>
+  <%= @project['name'] %>
+<% end %>
+</h3>
+
+<!--hours worked  -->
+
+<a href="/" class='btn btn-info'>Return to Projects</a>
+<a href="/volunteers" class='btn btn-info'>See All Volunteers</a>

@@ -20,6 +20,26 @@ post('/') do
   erb(:index)
 end
 
-get('/volunteers') do
+get('/projects/:project_id') do
+  @project = Project.find(params[:project_id].to_i)
+  @volunteers = Volunteer.all
+  erb(:one_project)
+end
 
+get('/volunteers') do
+  @volunteers = Volunteer.all
+  erb(:all_volunteers)
+end
+
+post('/volunteers') do
+  new_volunteer = Volunteer.new({:id=>nil, :name=>params[:volunteer_name]})
+  new_volunteer.save
+  @volunteers = Volunteer.all
+  erb(:all_volunteers)
+end
+
+get('/volunteers/:volunteer_id') do
+  @volunteer = Volunteer.find(params[:volunteer_id].to_i)
+  @project = Project.find(@volunteer['project_id'].to_i)
+  erb(:one_volunteer)
 end
