@@ -1,0 +1,21 @@
+<h1>All Projects</h1>
+<ul>
+  <% @projects.each do |project|  %>
+  <li><a href="\projects\<%= project['id'] %>"><%= project['name'] %></a></li>
+  <% end  %>
+</ul>
+
+<br><br>
+
+<h1>Add Project</h1>
+<form action="/" method="post">
+  <div class="form-group">
+    <label for="project_name">Project Name</label>
+    <input type="text" name="project_name">
+  </div>
+  <button type="submit" name="button">Add Project</button>
+</form>
+
+<br><br>
+
+<a href="/volunteers" class='btn btn-info'>See All Volunteers</a>
