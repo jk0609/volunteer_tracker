@@ -48,7 +48,7 @@ describe('Volunteer') do
     it('changes attributes of an existing database entry') do
       volunteer1 = Volunteer.new({:id=>nil, :name=>'volunteer1'})
       volunteer1.save
-      volunteer1.update(:name=>'volunteer2')
+      volunteer1.update('volunteer2')
       expect(volunteer1.name).to(eq('volunteer2'))
     end
   end

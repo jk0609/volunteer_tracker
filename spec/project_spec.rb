@@ -41,18 +41,18 @@ describe('Project') do
       project1 = Project.new({:id=>nil, :name=>'project1'})
       volunteer1.save
       project1.save
-      project1.add_volunteers([volunteer1.id])
+      project1.update_volunteers([volunteer1.id])
       expect(project1.volunteers).to(eq([volunteer1]))
     end
   end
 
-  describe('#add_volunteers') do #remove project works the same but sets project_id = 0
+  describe('#update_volunteers') do
     it('updates project_id attribute of all volunteer ids in argument array') do
       volunteer1 = Volunteer.new({:id=>nil, :name=>'volunteer1'})
       project1 = Project.new({:id=>nil, :name=>'project1'})
       volunteer1.save
       project1.save
-      project1.add_volunteers([volunteer1.id])
+      project1.update_volunteers([volunteer1.id])
       expect(project1.volunteers).to(eq([volunteer1]))
     end
   end
@@ -63,6 +63,15 @@ describe('Project') do
       project1.save
       project1.delete
       expect(Project.all).to(eq([]))
+    end
+  end
+
+  describe('.update') do
+    it('changes attributes of an existing database entry') do
+      project1 = Project.new({:id=>nil, :name=>'project1'})
+      project1.save
+      project1.update('project2')
+      expect(project1.name).to(eq('project2'))
     end
   end
 

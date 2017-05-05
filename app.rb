@@ -36,16 +36,15 @@ end
 
 post('/projects/:project_id') do
   @project = Project.find(params[:project_id])
-  @project.remove_volunteers(params[:volunteer_ids])
+  @project.update_volunteers(params[:volunteer_ids])
 
   @volunteers = Volunteer.all
-
   erb(:one_project)
 end
 
 patch('/projects/:project_id') do
   @project = Project.find(params[:project_id])
-  @project.add_volunteers(params[:volunteer_ids])
+  @project.update(params[:new_name])
   @volunteers = Volunteer.all
   erb(:one_project)
 end

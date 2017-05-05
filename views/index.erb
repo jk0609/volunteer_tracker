@@ -1,7 +1,7 @@
 <h1>All Projects</h1>
 <ul>
   <% @projects.each do |project|  %>
-  <li><a href="\projects\<%= project.id %>"><%= project.name %></a></li>
+  <li><a href="/projects/<%= project.id %>"><%= project.name %></a></li>
   <% end  %>
 </ul>
 
@@ -11,9 +11,9 @@
 <form action="/" method="post">
   <div class="form-group">
     <label for="project_name">Project Name</label>
-    <input type="text" name="project_name">
+    <input type="text" name="project_name" required>
   </div>
-  <button type="submit" name="button">Add Project</button>
+  <button type="submit" name="button" id='add'>Add Project</button>
 </form>
 
 <br><br>

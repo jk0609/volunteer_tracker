@@ -36,18 +36,14 @@ class Project
     found
   end
 
-  def add_volunteers(volunteer_id_array)
+  def update_volunteers(volunteer_id_array)
     if volunteer_id_array!=nil
       volunteer_id_array.each do |volunteer_id|
-        DB.exec("UPDATE volunteers SET project_id=#{@id} WHERE id=#{volunteer_id};")
-      end
-    end
-  end
-
-  def remove_volunteers(volunteer_id_array)
-    if volunteer_id_array!=nil
-      volunteer_id_array.each do |volunteer_id|
-        DB.exec("UPDATE volunteers SET project_id=0 WHERE id=#{volunteer_id};")
+        if Volunteer.find(volunteer_id).project_id=='0'
+          DB.exec("UPDATE volunteers SET project_id=#{@id} WHERE id=#{volunteer_id};")
+        else
+          DB.exec("UPDATE volunteers SET project_id=0 WHERE id=#{volunteer_id};")
+        end
       end
     end
   end
@@ -66,5 +62,12 @@ class Project
   def delete
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
     DB.exec("UPDATE volunteers SET project_id=0 WHERE project_id=#{@id}")
+  end
+
+  def update (name)
+    if name != ""
+      @name = name
+      DB.exec("UPDATE projects SET name = '#{@name}' WHERE id = #{@id};")
+    end
   end
 end

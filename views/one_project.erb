@@ -1,7 +1,9 @@
 <h1><%= @project.name %></h1>
 
+<p>Select available volunteers to assign them to this project or select current volunteers to unassign them.</p>
+
 <h3>Current Volunteers</h3>
-<form class="" action="\projects\<%= @project.id %>" method="post">
+<form class="" action="/projects/<%= @project.id %>" method="post">
   <div class="form-group">
   <% @volunteers.each do |volunteer| %>
     <% if volunteer.project_id==@project.id %>
@@ -11,29 +13,35 @@
     <% end  %>
   <% end  %>
   </div>
-  <button type="submit" name="button">Unassign From Project</button>
-</form>
-<br>
-<h3>Available Volunteers</h3>
-<form class="" action="\projects\<%= @project.id %>" method="post">
-  <input type="hidden" name="_method" value="patch">
+  <br>
+  <h3>Available Volunteers</h3>
   <div class="form-group">
   <% @volunteers.each do |volunteer| %>
     <% if volunteer.project_id=='0' %>
     <div>
-      <input type="checkbox" name="volunteer_ids[]" value="<%= volunteer.id %>"><%= volunteer.name %>
+      <input type="checkbox" name="volunteer_ids[]" value="<%= volunteer.id %>" id='open'><%= volunteer.name %>
     </div>
     <% end  %>
   <% end  %>
   </div>
-  <button type="submit" name="button">Assign to Project</button>
+  <button type="submit" name="button">Update Volunteers</button>
 </form>
-<!--List of Volunteers on staff with unassign and add hours buttons  -->
+<br>
+
+<form class="" action="/projects/<%= @project.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+    <label for="new_name">Change Project Name</label>
+    <input type="text" name="new_name">
+  </div>
+  <button type="submit" name="button" id='update'>Change Project Name</button>
+</form>
+
 <br>
 <form class="" action="/" method="post">
   <input type="hidden" name="_method" value="delete">
   <input type="hidden" name="project_id" value="<%= @project.id %>">
-  <button type="submit" name="button">Delete Project</button>
+  <button type="submit" name="button" id='delete'>Delete Project</button>
 </form>
 <br>
 <a href="/" class='btn btn-info'>Return to Projects</a>
