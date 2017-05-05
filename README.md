@@ -9,11 +9,11 @@ Exercise in Ruby, Sinatra, and Postgres/SQL for setting up a SQL database for a 
 ## Setup/Installation Requirements
 You must have Postgres installed. Clone the directory and run the database setup instructions below. Open your Ruby terminal and run $ bundle, followed by $ ruby app.rb. Open a web browser and navigate to /localhost:4567.
 
-PSQL commands:
-CREATE DATABASE volunteer_tracker;
-CREATE TABLE projects (id serial PRIMARY KEY, name varchar)
-CREATE TABLE volunteers (id serial PRIMARY KEY, name varchar, project_id int)
-CREATE DATABASE volunteer_tracker_test WITH TEMPLATE volunteer_tracker_test
+###PSQL commands:
+1.CREATE DATABASE volunteer_tracker;
+2.CREATE TABLE projects (id serial PRIMARY KEY, name varchar)
+3.CREATE TABLE volunteers (id serial PRIMARY KEY, name varchar, project_id int)
+4.CREATE DATABASE volunteer_tracker_test WITH TEMPLATE volunteer_tracker_test
 
 ## Technologies Used
 
